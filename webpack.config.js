@@ -30,24 +30,24 @@ const optimization = () => {
 
 const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`
 
-const cssLoaders = extra => {
-    const loaders = [
-      {
-        loader: MiniCssExtractPlugin.loader,
-        options: {
-          hmr: isDev,
-          reloadAll: true
-        },
-      },
-      'css-loader'
-    ]
-  
-    if (extra) {
-      loaders.push(extra)
-    }
-  
-    return loaders
-  }
+// const cssLoaders = extra => {
+//     const loaders = [
+//       {
+//         loader: MiniCssExtractPlugin.loader,
+//         options: {
+//           hmr: isDev,
+//           reloadAll: true
+//         },
+//       },
+//       'css-loader'
+//     ]
+//
+//     if (extra) {
+//       loaders.push(extra)
+//     }
+//
+//     return loaders
+//   }
 
 const plugins = () => {
     const base = [
@@ -116,11 +116,11 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: cssLoaders()
+                use: ['style-loader', 'css-loader', 'postcss-loader']
             },
             {
                 test: /\.s[ac]ss$/,
-                use: cssLoaders('sass-loader')
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
             },
             {
                 test: /\.(png|jpg|svg|gif)$/,
